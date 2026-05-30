@@ -16,12 +16,13 @@
 Author: Xinyi Ma
 """
 
+import hashlib
 import json
 import os
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from urllib.parse import quote
+from urllib.parse import quote, urljoin
 
 import requests
 from bs4 import BeautifulSoup
@@ -60,6 +61,11 @@ KEYWORDS = [
 # 工具函数
 # =========================================================================
 
+def now_bj() -> datetime:
+    """Return current Beijing time (UTC+8), works correctly in GitHub Actions."""
+    return datetime.now(timezone.utc) + timedelta(hours=8)
+
+
 def safe_get(url: str, timeout: int = 15) -> requests.Response | None:
     """安全的 HTTP GET，失败返回 None"""
     try:
@@ -84,14 +90,24 @@ def extract_text(elem, selectors: list[str]) -> str:
     return ""
 
 
+_SOURCE_BASE = {
+    "实习僧": "https://www.shixiseng.com",
+    "牛客网": "https://www.nowcoder.com",
+    "应届生": "https://www.yingjiesheng.com",
+}
+
+
 def make_job(title: str, company: str, location: str,
              salary: str, link: str, keyword: str, source: str) -> dict:
     """构造标准岗位字典"""
     if link and not link.startswith("http"):
-        if "shixiseng" in link or link.startswith("/"):
-            link = "https://www.shixiseng.com" + link
+        base = _SOURCE_BASE.get(source, "")
+        if base:
+            link = urljoin(base + "/", link)
+    # Use md5 for a stable, deterministic ID (Python's hash() is randomized per-run)
+    job_id = int(hashlib.md5(link.encode(), usedforsecurity=False).hexdigest()[:8], 16)
     return {
-        "id": abs(hash(link)) % (10**9),   # 稳定唯一 ID
+        "id": job_id,
         "title": title or "未知岗位",
         "company": company or "未知公司",
         "location": location,
@@ -99,7 +115,7 @@ def make_job(title: str, company: str, location: str,
         "link": link,
         "keyword": keyword,
         "source": source,
-        "found_at": datetime.now().strftime("%Y-%m-%d"),
+        "found_at": now_bj().strftime("%Y-%m-%d"),
     }
 
 # =========================================================================
@@ -274,13 +290,14 @@ def load_jobs() -> list[dict]:
 
 def save_jobs(jobs: list[dict]) -> None:
     """保存到 jobs.json，只保留最近 KEEP_DAYS 天"""
-    cutoff = (datetime.now() - timedelta(days=KEEP_DAYS)).strftime("%Y-%m-%d")
+    bj = now_bj()
+    cutoff = (bj - timedelta(days=KEEP_DAYS)).strftime("%Y-%m-%d")
     jobs = [j for j in jobs if j.get("found_at", "2000-01-01") >= cutoff]
 
     Path(JOBS_FILE).parent.mkdir(parents=True, exist_ok=True)
     with open(JOBS_FILE, "w", encoding="utf-8") as f:
         json.dump({
-            "updated_at": datetime.now().isoformat(timespec="seconds"),
+            "updated_at": bj.strftime("%Y-%m-%dT%H:%M:%S"),
             "total": len(jobs),
             "jobs": jobs,
         }, f, ensure_ascii=False, indent=2)
@@ -297,8 +314,9 @@ def generate_html(jobs: list[dict]) -> str:
     jobs_sorted = sorted(jobs, key=lambda x: x.get("found_at", ""), reverse=True)
 
     # 统计
-    today = datetime.now().strftime("%Y-%m-%d")
-    cutoff_7d = (datetime.now() - timedelta(days=DISPLAY_DAYS)).strftime("%Y-%m-%d")
+    bj = now_bj()
+    today = bj.strftime("%Y-%m-%d")
+    cutoff_7d = (bj - timedelta(days=DISPLAY_DAYS)).strftime("%Y-%m-%d")
     new_today = sum(1 for j in jobs if j.get("found_at") == today)
     new_7d = sum(1 for j in jobs if j.get("found_at", "") >= cutoff_7d)
 
@@ -615,7 +633,7 @@ def generate_html(jobs: list[dict]) -> str:
 </div>
 
 <div class="footer">
-  数据更新于 {datetime.now().strftime("%Y-%m-%d %H:%M")} · 
+  数据更新于 {bj.strftime("%Y-%m-%d %H:%M")} (北京时间) ·
   仅展示近 {KEEP_DAYS} 天数据 · 
   标记状态保存在本地浏览器，清除缓存后会重置
 </div>
@@ -769,7 +787,7 @@ applyFilters();
 
 def main():
     print("=" * 60)
-    print(f"🚀 远程实习监控 v2 启动: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"🚀 远程实习监控 v2 启动: {now_bj().strftime('%Y-%m-%d %H:%M:%S')} (北京时间)")
     print("=" * 60)
 
     # 1. 加载历史数据
