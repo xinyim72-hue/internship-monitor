@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>远程实习监控仪表盘</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f0f4f8;
+    color: #1a202c;
+    min-height: 100vh;
+  }
+
+  /* 顶部 header */
+  .header {
+    background: linear-gradient(135deg, #1a365d 0%, #2b6cb0 100%);
+    color: white;
+    padding: 24px 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .header h1 { font-size: 24px; font-weight: 700; margin-bottom: 6px; }
+  .header p { font-size: 14px; opacity: 0.8; }
+  .stats {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.15);
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-align: center;
+  }
+  .stat-card .num { font-size: 28px; font-weight: 800; }
+  .stat-card .label { font-size: 12px; opacity: 0.85; margin-top: 2px; }
+
+  /* 筛选栏 */
+  .filter-bar {
+    background: white;
+    padding: 16px 32px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #e2e8f0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+  }
+  .filter-bar input, .filter-bar select {
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 14px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .filter-bar input:focus, .filter-bar select:focus {
+    border-color: #3182ce;
+  }
+  .filter-bar input { width: 260px; }
+  .badge {
+    background: #ebf8ff;
+    color: #2b6cb0;
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1px solid #bee3f8;
+    transition: all 0.15s;
+    white-space: nowrap;
+  }
+  .badge:hover, .badge.active {
+    background: #2b6cb0;
+    color: white;
+  }
+  .badge.danger { background: #fff5f5; color: #c53030; border-color: #fed7d7; }
+  .badge.danger:hover, .badge.danger.active {
+    background: #c53030; color: white;
+  }
+
+  /* 岗位列表 */
+  .container {
+    max-width: 960px;
+    margin: 24px auto;
+    padding: 0 20px;
+  }
+  .section-title {
+    font-size: 15px;
+    color: #4a5568;
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+
+  /* 岗位卡片 */
+  .job-card {
+    background: white;
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.15s;
+    position: relative;
+  }
+  .job-card:hover {
+    border-color: #90cdf4;
+    box-shadow: 0 4px 12px rgba(49,130,206,0.1);
+    transform: translateY(-1px);
+  }
+  .job-card.hidden-card {
+    opacity: 0.35;
+    background: #f7fafc;
+  }
+  .job-card.starred-card {
+    border-left: 4px solid #f6ad55;
+  }
+  .job-card.applied-card {
+    border-left: 4px solid #68d391;
+  }
+
+  /* 卡片内容 */
+  .job-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .new-badge {
+    background: #fed7e2;
+    color: #c53030;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 20px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+  .job-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1a202c;
+    line-height: 1.4;
+  }
+  .job-meta {
+    font-size: 13px;
+    color: #718096;
+    margin-bottom: 12px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .job-meta span { display: flex; align-items: center; gap: 4px; }
+
+  /* 操作按钮组 */
+  .job-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .btn {
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: 1.5px solid;
+    transition: all 0.15s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .btn-primary {
+    background: #2b6cb0;
+    color: white;
+    border-color: #2b6cb0;
+  }
+  .btn-primary:hover { background: #1a4f8a; border-color: #1a4f8a; }
+  .btn-star {
+    background: white;
+    color: #c05621;
+    border-color: #fbd38d;
+  }
+  .btn-star:hover, .btn-star.active {
+    background: #fefcbf;
+    border-color: #f6ad55;
+  }
+  .btn-apply {
+    background: white;
+    color: #276749;
+    border-color: #9ae6b4;
+  }
+  .btn-apply:hover, .btn-apply.active {
+    background: #f0fff4;
+    border-color: #68d391;
+  }
+  .btn-hide {
+    background: white;
+    color: #718096;
+    border-color: #e2e8f0;
+  }
+  .btn-hide:hover, .btn-hide.active {
+    background: #f7fafc;
+    border-color: #cbd5e0;
+  }
+
+  /* 来源标签 */
+  .source-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .source-实习僧 { background: #ebf8ff; color: #2c5282; }
+  .source-牛客网 { background: #f0fff4; color: #22543d; }
+  .source-应届生 { background: #fff5f5; color: #742a2a; }
+
+  /* 空状态 */
+  .empty {
+    text-align: center;
+    padding: 80px 20px;
+    color: #a0aec0;
+  }
+  .empty .emoji { font-size: 48px; margin-bottom: 16px; }
+  .empty p { font-size: 16px; }
+
+  /* 底部 */
+  .footer {
+    text-align: center;
+    padding: 40px 20px;
+    color: #a0aec0;
+    font-size: 13px;
+  }
+
+  /* 响应式 */
+  @media (max-width: 600px) {
+    .header { padding: 18px 16px; }
+    .filter-bar { padding: 12px 16px; }
+    .filter-bar input { width: 100%; }
+    .container { padding: 0 12px; }
+    .job-card { padding: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📊 远程实习监控仪表盘</h1>
+  <p>自动聚合实习僧 · 牛客网 · 应届生三大平台的远程数据分析实习岗位</p>
+  <div class="stats">
+    <div class="stat-card">
+      <div class="num" id="stat-today">2</div>
+      <div class="label">今日新增</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="stat-7d">99</div>
+      <div class="label">近7天新增</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="stat-total">99</div>
+      <div class="label">近30天总计</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="stat-visible">-</div>
+      <div class="label">当前显示</div>
+    </div>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <input type="text" id="search" placeholder="🔍 搜索岗位、公司名..." oninput="applyFilters()">
+  <select id="source-filter" onchange="applyFilters()">
+    <option value="">全部来源</option>
+    <option value="实习僧">实习僧</option>
+  </select>
+  <select id="date-filter" onchange="applyFilters()">
+    <option value="7">近7天</option>
+    <option value="14">近14天</option>
+    <option value="30">近30天</option>
+    <option value="0">全部</option>
+  </select>
+  <span class="badge active" id="filter-all" onclick="setStatusFilter('all')">全部</span>
+  <span class="badge" id="filter-starred" onclick="setStatusFilter('starred')">⭐ 收藏</span>
+  <span class="badge" id="filter-applied" onclick="setStatusFilter('applied')">✅ 已投</span>
+  <span class="badge danger" id="filter-hidden" onclick="setStatusFilter('hidden')">🚫 已隐藏</span>
+</div>
+
+<div class="container">
+  <p class="section-title" id="result-count"></p>
+  <div id="job-list"></div>
+  <div class="empty" id="empty-state" style="display:none">
+    <div class="emoji">🔍</div>
+    <p>没有符合条件的岗位</p>
+  </div>
+</div>
+
+<div class="footer">
+  数据更新于 2026-05-30 09:51 · 
+  仅展示近 30 天数据 · 
+  标记状态保存在本地浏览器，清除缓存后会重置
+</div>
+
+<script>
+// ── 数据 ──────────────────────────────────────────────
+const ALL_JOBS = [{"id": 278607732, "title": "商业分析洞察实习", "company": "HALEON赫力昂医疗/健康/制药/生物/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_9vbkxxgy8981?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-30"}, {"id": 267454623, "title": "剪辑", "company": "叙格文化企业服务/咨询/-", "location": "徐州", "salary": "", "link": "https://www.shixiseng.com/intern/inn_u8apr0tkvsdc?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-30"}, {"id": 258705151, "title": "高级数据分析讲", "company": "拓端数据企业服务/咨询/少于", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_ujoutljtcw5i?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 440115076, "title": "数据分析实习岗", "company": "智汇绿行企业服务/咨询/-", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_fve7r1ygbcc3?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 371379938, "title": "数据分析", "company": "安徽志成房产/家居/物业/建筑/-", "location": "全国", "salary": "", "link": "https://www.shixiseng.com/intern/inn_twj8tejqeqj6?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 179638618, "title": "数据分析", "company": "京东互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_tedyoll2bytx?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 526051301, "title": "数据分析", "company": "京东互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_nqvfgxgdvnak?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 706181823, "title": "数据分析", "company": "晤源信息互联网/游戏/软件/少于", "location": "南昌", "salary": "", "link": "https://www.shixiseng.com/intern/inn_bmbzmllrjqk4?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 369285999, "title": "快手数据分析/数据分析实习", "company": "快手互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_wwdzznu4bbg2?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 35673286, "title": "投数据分析开发实习", "company": "BitAudit互联网/游戏/软件/少于", "location": "珠海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_9vq9hburq3hs?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 37635577, "title": "数据分析实习", "company": "欧莱雅-百库电商互联网/游戏/软件/以上", "location": "广州", "salary": "", "link": "https://www.shixiseng.com/intern/inn_wfzolh4zoqcy?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 892457419, "title": "数据分析实习", "company": "LHH FESCO企业服务/咨询/-", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_90ztdcorh91e?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 163460603, "title": "数据分析实习", "company": "LHH FESCO企业服务/咨询/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_nvsrtkwxb9tk?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 277431630, "title": "数据分析实习", "company": "众安科技企业服务/咨询/以上", "location": "杭州", "salary": "", "link": "https://www.shixiseng.com/intern/inn_o5hu2troxhov?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 799488882, "title": "数据分析实习", "company": "亚信科技互联网/游戏/软件/以上", "location": "济南", "salary": "", "link": "https://www.shixiseng.com/intern/inn_lqfnizli5c4h?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 802959456, "title": "数据分析实习", "company": "哈啰互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_nqj1gg54kigu?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 4797810, "title": "数据分析实习", "company": "道达尔能源（TotalEnergies)化工/能源/环保/以上", "location": "武汉", "salary": "", "link": "https://www.shixiseng.com/intern/inn_blr57qzhlq0u?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 316822716, "title": "数据分析实习", "company": "众安保险金融/经济/投资/财会/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_tsreclgcqqls?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 626917672, "title": "数据分析实习", "company": "埃森哲互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_pn2ozkrmisny?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 166808314, "title": "数据分析实习", "company": "清华四川能源互联网研究院电子/通信/硬件/-", "location": "成都", "salary": "", "link": "https://www.shixiseng.com/intern/inn_ryk2h6ebf0a5?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 262346664, "title": "数据分析实习", "company": "众安保险金融/经济/投资/财会/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_b78qwvhfrvam?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 705557375, "title": "数据分析实习", "company": "奇富科技互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_ybw7vc1itbwk?pcm=pc_SearchList", "keyword": "远程 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 328630568, "title": "数据科学实习", "company": "Striv电子/通信/硬件/少于", "location": "深圳", "salary": "", "link": "https://www.shixiseng.com/intern/inn_7iyly6ukl25g?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 456987097, "title": "数据科学实习", "company": "液化空气汽车/机械/制造/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_dipy9hlpbkyy?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 402205031, "title": "数据科学实习", "company": "百度互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_xthiqlzivbzh?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 28680491, "title": "& -数据分析实习", "company": "滴滴互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_phsesvleq5nn?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 266982113, "title": "数据科学与分析实习", "company": "小红书互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_3aity7auyyrk?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 829716803, "title": "数据科学实习-", "company": "字节跳动互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_6x6siynkyyal?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 145379599, "title": "内容数据科学实习", "company": "小红书互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_dedhe9dfudre?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 425248572, "title": "数据科学实习-抖音", "company": "字节跳动互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_ie3ear9bq4ej?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 791354296, "title": "数据科学实习-抖音电商", "company": "字节跳动互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_vk5y2uhpktyp?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 229615233, "title": "数据科学实习-抖音电商", "company": "字节跳动互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_pd1hycslnqhe?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 942357477, "title": "数据科学实习-抖音电商", "company": "字节跳动互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_xqk9dgj1h89r?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 222099536, "title": "数据科学实习（可转正）", "company": "圣戈班汽车/机械/制造/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_ryvi3zeqinkr?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 395354688, "title": "数据科学实习-", "company": "博世中国汽车/机械/制造/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_lruz41vnxsj9?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 244398584, "title": "技术研究-数据科学方向", "company": "腾讯互联网/游戏/软件/以上", "location": "深圳", "salary": "", "link": "https://www.shixiseng.com/intern/inn_rvuvvxoymbvr?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 34803548, "title": "  & -数据分析实习", "company": "滴滴互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_sgj8fmst77nr?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 277157291, "title": "数据科学实习- ", "company": "字节跳动互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_u1glhcch9bqb?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 71268508, "title": "商品中台数据科学实习-", "company": "字节跳动互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_0u1nqcten8rm?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 691058784, "title": "数据科学实习- ", "company": "字节跳动互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_arjfyx378jdh?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 746067207, "title": "数据科学实习- ", "company": "字节跳动互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_ysnfx7udr5qd?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 872016293, "title": "数据科学实习- ", "company": "字节跳动互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_bnssj2rwmvej?pcm=pc_SearchList", "keyword": "远程 数据科学", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 643066638, "title": "数据科学家", "company": "淘宝闪购互联网/游戏/软件/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_tnsjxsqrouwc?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 638154629, "title": "数据分析实习", "company": "超弦宇宙科技有限公司互联网/游戏/软件/-", "location": "深圳", "salary": "", "link": "https://www.shixiseng.com/intern/inn_zwl6wvkeop6l?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 179649003, "title": "数据处理实习", "company": "网易有道互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_rixjyobinz2d?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 706919833, "title": "数据分析实习()", "company": "NIO蔚来汽车/机械/制造/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_jtyjhlowsnst?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 354710267, "title": "数据分析实习", "company": "网易有道互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_zkz6xa7bcul8?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 427596737, "title": "数据分析实习", "company": "百度互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_km9nmsuj0dvy?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 722645889, "title": "数据分析实习()", "company": "NIO蔚来汽车/机械/制造/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_ndb6rgc6wfga?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 14685197, "title": "平台治理部-数据分析实习", "company": "滴滴互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_89doe5huiw7n?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 681268613, "title": " -数据分析实习", "company": "滴滴互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_qimcfywh0exa?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 848265700, "title": "数据助理（数据标注）", "company": "德尚韵兴医疗科技互联网/游戏/软件/-", "location": "杭州", "salary": "", "link": "https://www.shixiseng.com/intern/inn_astteafn8bln?pcm=pc_SearchList", "keyword": "远程 数据运营", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 71403479, "title": "商业分析", "company": "小红书科技（珠海横琴）电子/通信/硬件/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_u6povymcihbr?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 49714590, "title": "商业分析", "company": "伟思创科技互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_ucuoi3utvilr?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 352399680, "title": "商业分析", "company": "数知梦科技电子/通信/硬件/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_hpopv3ufnakt?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 991559601, "title": "商业分析", "company": "京东互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_jsxlgcsps6kr?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 737304339, "title": "战略与商业分析部——商业分析实习", "company": "滴滴互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_ge7dt3f3gqrd?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 833362258, "title": "商业分析实习（优秀可远）", "company": "Hello Interest互联网/游戏/软件/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_5q1bpmqk8zms?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 822582882, "title": "战略与商业分析部（）-商业分析实习", "company": "滴滴互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_wlocwx1gyuoj?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 129792929, "title": "战略与商业分析部-商业分析实习（）", "company": "滴滴互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_lr1peqymo5cp?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 353906612, "title": "商业分析实习", "company": "simplyBrand互联网/游戏/软件/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_bswne29nnp42?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 444349296, "title": "商业分析实习", "company": "百度互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_3sdztgutrctf?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 271288942, "title": "商业分析实习", "company": "百丽国际快消/百货/批发/零售/以上", "location": "深圳", "salary": "", "link": "https://www.shixiseng.com/intern/inn_02uu5euoh6c2?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 155751120, "title": "商业分析实习", "company": "百度互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_4vwipml00ccn?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 557829748, "title": "商业分析实习", "company": "百度互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_xmmtubyn9hkd?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 381477114, "title": "实习（商业分析）", "company": "恒俊(海口江东新区)广告/传媒/公关/展览/-", "location": "海口", "salary": "", "link": "https://www.shixiseng.com/intern/inn_cppwmnblbpsi?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 338361317, "title": "商业分析实习", "company": "恬橙科技企业服务/咨询/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_fkq3zxlgdo29?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 235600089, "title": "商业分析实习", "company": "霸王茶姬快消/百货/批发/零售/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_rfvimuvqgfjb?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 84050063, "title": "商业分析实习", "company": "百度互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_hk3qkbdfc1gl?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 354357892, "title": "商业分析实习", "company": "RET睿意德企业服务/咨询/-", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_jidekfgz00fr?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 857172743, "title": "商业分析实习", "company": "熵淬数据广告/传媒/公关/展览/以下", "location": "天津", "salary": "", "link": "https://www.shixiseng.com/intern/inn_wrepgqbcpuns?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 827323815, "title": "战略与商业分析部-数据分析实习", "company": "滴滴互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_05cryhnk1eju?pcm=pc_SearchList", "keyword": "远程 商业分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 85033511, "title": "项目运营实习-居家办公", "company": "德聚仁合教育/培训/-", "location": "杭州", "salary": "", "link": "https://www.shixiseng.com/intern/inn_obhxqhipcnjj?pcm=pc_SearchList", "keyword": "居家办公 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 322005765, "title": "电商测评账号注册（居家办公）", "company": "萌派贸易有限公司交通/贸易/物流/少于", "location": "厦门", "salary": "", "link": "https://www.shixiseng.com/intern/inn_9yob2obxbwri?pcm=pc_SearchList", "keyword": "居家办公 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 758148083, "title": "线上股票研究助理实习【居家办公】", "company": "凌创咨询企业服务/咨询/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_nqhxrb1vkosk?pcm=pc_SearchList", "keyword": "居家办公 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 291561090, "title": "线上股票研究助理实习【居家办公】", "company": "凌创咨询企业服务/咨询/-", "location": "昆明", "salary": "", "link": "https://www.shixiseng.com/intern/inn_hlqaeqtysf6s?pcm=pc_SearchList", "keyword": "居家办公 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 751584909, "title": "线上股票研究助理实习【居家办公】", "company": "凌创咨询企业服务/咨询/-", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_8tshwhixcikc?pcm=pc_SearchList", "keyword": "居家办公 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 407710046, "title": "公司运营岗实习（远居家办公！）", "company": "图博数智互联网/游戏/软件/-", "location": "杭州", "salary": "", "link": "https://www.shixiseng.com/intern/inn_flmzeiemtvk6?pcm=pc_SearchList", "keyword": "居家办公 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 63612413, "title": "【提供实习证明】宅家英语绘本陪读 | 居家办公", "company": "久趣教育教育/培训/-", "location": "杭州", "salary": "", "link": "https://www.shixiseng.com/intern/inn_q6u8agohgdz7?pcm=pc_SearchList", "keyword": "居家办公 数据分析", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 277122887, "title": "实习", "company": "友邦资讯科技互联网/游戏/软件/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_brumufze75h1?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 843311079, "title": " 平台搭建实习", "company": "博西家电 B/S/H/汽车/机械/制造/以上", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_g7gkmeddubxa?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 799182981, "title": "- &  ", "company": "万宝盛华企业服务/咨询/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_vmk6nvqalsf1?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 773363725, "title": "消金（资金）  实习(可转正)", "company": "Shopee互联网/游戏/软件/以上", "location": "深圳", "salary": "", "link": "https://www.shixiseng.com/intern/inn_tuqgnmyzij6g?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 343309845, "title": "数据集成与   实习-", "company": "博世中国汽车/机械/制造/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_knv8zajisy7z?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 117256481, "title": "实习（ & ）", "company": "博西家电 B/S/H/汽车/机械/制造/以上", "location": "南京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_jnqect9vnlyt?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 541188444, "title": "研究所-军组日常实习", "company": "国金证券金融/经济/投资/财会/以上", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_uqmnomdeluvs?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 428320636, "title": "韩语医药咨询", "company": "SAI-Med赛麦德咨询企业服务/咨询/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_j8pfonece20q?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 385233412, "title": "医药咨询-精通日语+英语", "company": "SAI-Med赛麦德咨询企业服务/咨询/-", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_kstygu5pdoer?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 757934196, "title": "视频拍摄剪辑岗（实习岗）", "company": "AI真牛教育/培训/-", "location": "深圳", "salary": "", "link": "https://www.shixiseng.com/intern/inn_rzvv57lpc2zy?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 78406745, "title": "领英运营", "company": "以明科技 Insight Tech企业服务/咨询/以下", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_izmaz4r5km96?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 107415071, "title": "动捕数据修正实习", "company": "上海济声科技互联网/游戏/软件/-", "location": "沈阳", "salary": "", "link": "https://www.shixiseng.com/intern/inn_tpugjeorsnij?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 128273891, "title": "新媒体运营（远实习+时间自由）", "company": "领航甄选教育/培训/-", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_8aprbjbfr7lv?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 759340954, "title": "新媒体运营", "company": "明创元启企业服务/咨询/以下", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_eelj4yybkjgx?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 58704892, "title": "短视频拍摄与制 电商部 实习 – 远灵活办公", "company": "Ritter Sport快消/百货/批发/零售/以下", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_batngymwcoo4?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 374349780, "title": "数据分析（远）", "company": "信山行科技互联网/游戏/软件/少于", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_p8vk4tnkyzat?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 309469873, "title": "小红书和抖音自媒体博主", "company": "金榜研学企业服务/咨询/以下", "location": "武汉", "salary": "", "link": "https://www.shixiseng.com/intern/inn_hvshoqcqjpll?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 81429098, "title": "咨询调研实习", "company": "金榜研学企业服务/咨询/以下", "location": "北京", "salary": "", "link": "https://www.shixiseng.com/intern/inn_bhugetoipbhy?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 316500087, "title": "线上双休数据分析（实习）", "company": "花楠珊广告/传媒/公关/展览/-", "location": "芜湖", "salary": "", "link": "https://www.shixiseng.com/intern/inn_b2hcxxxpdirk?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}, {"id": 344973311, "title": "插画", "company": "摩可忆科技不限/少于", "location": "上海", "salary": "", "link": "https://www.shixiseng.com/intern/inn_feuzpq9wtavc?pcm=pc_SearchList", "keyword": "远程 BI", "source": "实习僧", "found_at": "2026-05-29"}];
+const TODAY = "2026-05-30";
+const CUTOFF_7D = "2026-05-23";
+
+// ── 状态管理 (localStorage) ───────────────────────────
+const STORAGE_KEY = "internship_monitor_status";
+
+function loadStatus() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}"); }
+  catch { return {}; }
+}
+function saveStatus(s) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+}
+function getJobStatus(id) {
+  return loadStatus()[id] || "normal";
+}
+function setJobStatus(id, status) {
+  const s = loadStatus();
+  if (status === "normal") delete s[id];
+  else s[id] = status;
+  saveStatus(s);
+}
+
+// ── 过滤状态 ──────────────────────────────────────────
+let currentStatusFilter = "all";
+
+function setStatusFilter(f) {
+  currentStatusFilter = f;
+  ["all","starred","applied","hidden"].forEach(k => {
+    document.getElementById("filter-" + k).classList.toggle("active", k === f);
+  });
+  applyFilters();
+}
+
+// ── 核心渲染 ──────────────────────────────────────────
+function applyFilters() {
+  const q = document.getElementById("search").value.trim().toLowerCase();
+  const srcFilter = document.getElementById("source-filter").value;
+  const days = parseInt(document.getElementById("date-filter").value);
+  const statusMap = loadStatus();
+
+  const cutoff = days === 0 ? "0000-00-00" :
+    new Date(Date.now() - days * 86400000).toISOString().slice(0, 10);
+
+  let filtered = ALL_JOBS.filter(j => {
+    // 日期筛选
+    if ((j.found_at || "") < cutoff) return false;
+    // 来源筛选
+    if (srcFilter && j.source !== srcFilter) return false;
+    // 文本搜索
+    if (q) {
+      const haystack = (j.title + j.company + j.keyword).toLowerCase();
+      if (!haystack.includes(q)) return false;
+    }
+    // 状态筛选
+    const st = statusMap[j.id] || "normal";
+    if (currentStatusFilter === "all") return st !== "hidden";
+    if (currentStatusFilter === "starred") return st === "starred";
+    if (currentStatusFilter === "applied") return st === "applied";
+    if (currentStatusFilter === "hidden") return st === "hidden";
+    return true;
+  });
+
+  document.getElementById("stat-visible").textContent = filtered.length;
+  document.getElementById("result-count").textContent =
+    `共 ${filtered.length} 个岗位`;
+
+  const list = document.getElementById("job-list");
+  const empty = document.getElementById("empty-state");
+
+  if (filtered.length === 0) {
+    list.innerHTML = "";
+    empty.style.display = "block";
+    return;
+  }
+  empty.style.display = "none";
+  list.innerHTML = filtered.map(j => renderCard(j, statusMap)).join("");
+}
+
+function renderCard(j, statusMap) {
+  const st = statusMap[j.id] || "normal";
+  const isNew = (j.found_at || "") >= CUTOFF_7D;
+  const isToday = j.found_at === TODAY;
+
+  let cardClass = "job-card";
+  if (st === "hidden") cardClass += " hidden-card";
+  if (st === "starred") cardClass += " starred-card";
+  if (st === "applied") cardClass += " applied-card";
+
+  const newBadge = isToday
+    ? '<span class="new-badge">🆕 今日</span>'
+    : isNew ? '<span class="new-badge" style="background:#e9d8fd;color:#553c9a">🆕 近7天</span>'
+    : '';
+
+  const salary = j.salary ? `<span>💰 ${j.salary}</span>` : "";
+  const location = j.location ? `<span>📍 ${j.location}</span>` : "";
+
+  return `
+  <div class="${cardClass}" id="card-${j.id}">
+    <div class="job-header">
+      ${newBadge}
+      <span class="job-title">${j.title}</span>
+    </div>
+    <div class="job-meta">
+      <span>🏢 ${j.company}</span>
+      ${salary}
+      ${location}
+      <span>📅 ${j.found_at}</span>
+      <span class="source-tag source-${j.source}">${j.source}</span>
+    </div>
+    <div class="job-actions">
+      <a class="btn btn-primary" href="${j.link}" target="_blank">🔗 查看投递</a>
+      <button class="btn btn-star ${st==='starred'?'active':''}"
+        onclick="toggleStatus(${j.id},'starred')">
+        ⭐ ${st==='starred'?'取消收藏':'收藏'}
+      </button>
+      <button class="btn btn-apply ${st==='applied'?'active':''}"
+        onclick="toggleStatus(${j.id},'applied')">
+        ✅ ${st==='applied'?'已投递':'标记已投'}
+      </button>
+      <button class="btn btn-hide ${st==='hidden'?'active':''}"
+        onclick="toggleStatus(${j.id},'hidden')">
+        🚫 ${st==='hidden'?'取消隐藏':'隐藏'}
+      </button>
+    </div>
+  </div>`;
+}
+
+function toggleStatus(id, newSt) {
+  const cur = getJobStatus(id);
+  setJobStatus(id, cur === newSt ? "normal" : newSt);
+  applyFilters();
+}
+
+// ── 初始化 ────────────────────────────────────────────
+applyFilters();
+</script>
+</body>
+</html>
