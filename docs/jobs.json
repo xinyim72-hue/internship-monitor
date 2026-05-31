@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-05-30T09:51:38",
-  "total": 99,
+  "updated_at": "2026-05-31T13:23:10",
+  "total": 103,
   "jobs": [
     {
       "id": 258705151,
@@ -1090,6 +1090,50 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-05-30"
+    },
+    {
+      "id": 2612841241,
+      "title": "数据科学实习-抖音活服务",
+      "company": "字节跳动互联网/游戏/软件/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_blanfny0s2mz?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-05-31"
+    },
+    {
+      "id": 545826210,
+      "title": "商业分析实习-",
+      "company": "博世中国汽车/机械/制造/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_n4drlnoqbizn?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-05-31"
+    },
+    {
+      "id": 3462370609,
+      "title": "陪伴类产品内容运营",
+      "company": "这里陪互联网/游戏/软件/以下",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_v0j5q2j66mf5?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-05-31"
+    },
+    {
+      "id": 1555037658,
+      "title": "法务助理实习",
+      "company": "金榜研学企业服务/咨询/以下",
+      "location": "广州",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_7ftgat0irvsa?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-05-31"
     }
   ]
 }
