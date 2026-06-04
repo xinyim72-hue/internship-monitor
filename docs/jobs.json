@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-03T14:08:13",
-  "total": 132,
+  "updated_at": "2026-06-04T14:00:34",
+  "total": 135,
   "jobs": [
     {
       "id": 258705151,
@@ -1453,6 +1453,39 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-06-03"
+    },
+    {
+      "id": 2511414049,
+      "title": "数据分析",
+      "company": "中财进宝互联网/游戏/软件/-",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_1tyxwvbifdal?pcm=pc_SearchList",
+      "keyword": "远程 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-06-04"
+    },
+    {
+      "id": 2357250524,
+      "title": "数据科学实习- ",
+      "company": "字节跳动互联网/游戏/软件/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_lkbttebaigwp?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-06-04"
+    },
+    {
+      "id": 1459585342,
+      "title": "应用开发实习",
+      "company": "美因特信息科技互联网/游戏/软件/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_geukrvqd1q2q?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-06-04"
     }
   ]
 }
