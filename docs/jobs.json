@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-05T13:23:39",
-  "total": 147,
+  "updated_at": "2026-06-06T12:58:27",
+  "total": 149,
   "jobs": [
     {
       "id": 258705151,
@@ -1618,6 +1618,28 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-06-05"
+    },
+    {
+      "id": 449003947,
+      "title": "数据科学与智能实习-#",
+      "company": "康宁化工/能源/环保/以上",
+      "location": "重庆",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_5qt2bbibvlme?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-06-06"
+    },
+    {
+      "id": 683709058,
+      "title": "高考志愿规划",
+      "company": "金榜研学企业服务/咨询/以下",
+      "location": "深圳",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_tno1ypsqdrjn?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-06-06"
     }
   ]
 }
