@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-06T12:58:27",
-  "total": 149,
+  "updated_at": "2026-06-07T13:27:24",
+  "total": 150,
   "jobs": [
     {
       "id": 258705151,
@@ -1640,6 +1640,17 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-06-06"
+    },
+    {
+      "id": 1509536557,
+      "title": "新媒体运营（小红书语培方向·实习）",
+      "company": "番书教育教育/培训/以下",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_jerjouzhnerz?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-06-07"
     }
   ]
 }
