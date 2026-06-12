@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-11T13:55:03",
-  "total": 175,
+  "updated_at": "2026-06-12T13:54:07",
+  "total": 177,
   "jobs": [
     {
       "id": 258705151,
@@ -1926,6 +1926,28 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-06-11"
+    },
+    {
+      "id": 1006801946,
+      "title": "数据分析实习",
+      "company": "华住集团餐饮/酒店/旅游/娱乐/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_m8ohsaoirnmf?pcm=pc_SearchList",
+      "keyword": "远程 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-06-12"
+    },
+    {
+      "id": 3021651276,
+      "title": "校园现执督导",
+      "company": "前程无忧互联网/游戏/软件/-",
+      "location": "成都",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_8fj6ht9btmv0?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-06-12"
     }
   ]
 }
