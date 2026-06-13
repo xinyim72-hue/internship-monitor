@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-12T13:54:07",
-  "total": 177,
+  "updated_at": "2026-06-13T13:24:48",
+  "total": 179,
   "jobs": [
     {
       "id": 258705151,
@@ -1948,6 +1948,28 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-06-12"
+    },
+    {
+      "id": 1703917705,
+      "title": "地理科学讲/助教（科学搭子）",
+      "company": "厚朴科技教育/培训/-",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_6kpsf0g6xif8?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-06-13"
+    },
+    {
+      "id": 1519384874,
+      "title": "数据科学实习（搜索推荐）- ",
+      "company": "字节跳动互联网/游戏/软件/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_wgdtcnf8lheb?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-06-13"
     }
   ]
 }
