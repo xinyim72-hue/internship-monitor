@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-13T13:24:48",
-  "total": 179,
+  "updated_at": "2026-06-14T13:55:43",
+  "total": 181,
   "jobs": [
     {
       "id": 258705151,
@@ -1970,6 +1970,28 @@
       "keyword": "远程 数据科学",
       "source": "实习僧",
       "found_at": "2026-06-13"
+    },
+    {
+      "id": 284382882,
+      "title": "国际事业群（）-数据科学实习",
+      "company": "滴滴互联网/游戏/软件/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_b58ium20ilsz?pcm=pc_SearchList",
+      "keyword": "远程 数据运营",
+      "source": "实习僧",
+      "found_at": "2026-06-14"
+    },
+    {
+      "id": 1429154428,
+      "title": "电商测评账号注册（居家办公）",
+      "company": "萌派贸易有限公司交通/贸易/物流/少于",
+      "location": "厦门",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_vzmcd0swypyy?pcm=pc_SearchList",
+      "keyword": "居家办公 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-06-14"
     }
   ]
 }
