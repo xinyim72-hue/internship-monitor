@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-21T14:08:46",
-  "total": 212,
+  "updated_at": "2026-06-22T14:33:19",
+  "total": 213,
   "jobs": [
     {
       "id": 258705151,
@@ -2333,6 +2333,17 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-06-19"
+    },
+    {
+      "id": 2292168229,
+      "title": "实习",
+      "company": "猎上网企业服务/咨询/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_n6iklnpnfpps?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-06-22"
     }
   ]
 }
