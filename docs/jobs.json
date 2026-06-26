@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-25T13:09:57",
-  "total": 228,
+  "updated_at": "2026-06-26T13:13:29",
+  "total": 231,
   "jobs": [
     {
       "id": 258705151,
@@ -2509,6 +2509,39 @@
       "keyword": "远程 数据运营",
       "source": "实习僧",
       "found_at": "2026-06-25"
+    },
+    {
+      "id": 2605288938,
+      "title": "视频内容制实习",
+      "company": "络彼LOBECO企业服务/咨询/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_hukwxy1yaelq?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-06-26"
+    },
+    {
+      "id": 4078289153,
+      "title": "新媒体运营 实习",
+      "company": "AI真牛教育/培训/-",
+      "location": "深圳",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_drrzucoc1pyo?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-06-26"
+    },
+    {
+      "id": 2200709956,
+      "title": "运营实习",
+      "company": "德聚仁合教育/培训/-",
+      "location": "杭州",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_ypgjrws7e54r?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-06-26"
     }
   ]
 }
