@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-06-26T13:13:29",
-  "total": 231,
+  "updated_at": "2026-06-27T12:57:46",
+  "total": 232,
   "jobs": [
     {
       "id": 258705151,
@@ -2542,6 +2542,17 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-06-26"
+    },
+    {
+      "id": 137266717,
+      "title": "文案编辑",
+      "company": "叙格文化企业服务/咨询/-",
+      "location": "徐州",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_uhl8lmnog4ke?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-06-27"
     }
   ]
 }
