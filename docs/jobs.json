@@ -1,40 +1,7 @@
 {
-  "updated_at": "2026-08-18T10:18:07",
-  "total": 195,
+  "updated_at": "2026-08-19T10:22:00",
+  "total": 192,
   "jobs": [
-    {
-      "id": 452497644,
-      "title": "数据科学实习-抖音电商",
-      "company": "字节跳动互联网/游戏/软件/以上",
-      "location": "北京",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_e3v94xrfyvhh?pcm=pc_SearchList",
-      "keyword": "远程 数据科学",
-      "source": "实习僧",
-      "found_at": "2026-07-19"
-    },
-    {
-      "id": 3890425091,
-      "title": "数据科学实习-抖音电商",
-      "company": "字节跳动互联网/游戏/软件/以上",
-      "location": "上海",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_xabhqaq9qdag?pcm=pc_SearchList",
-      "keyword": "远程 数据科学",
-      "source": "实习僧",
-      "found_at": "2026-07-19"
-    },
-    {
-      "id": 2583350906,
-      "title": "看下新媒体图片新闻实习",
-      "company": "Vista看天下广告/传媒/公关/展览/-",
-      "location": "北京",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_3oryoyjr7cwb?pcm=pc_SearchList",
-      "keyword": "远程 BI",
-      "source": "实习僧",
-      "found_at": "2026-07-19"
-    },
     {
       "id": 178698659,
       "title": "数据分析实习",
