@@ -1,29 +1,7 @@
 {
-  "updated_at": "2026-08-23T10:25:45",
-  "total": 199,
+  "updated_at": "2026-08-24T10:25:09",
+  "total": 200,
   "jobs": [
-    {
-      "id": 3246141917,
-      "title": "新媒体运营（远居家办公）",
-      "company": "流今文化企业服务/咨询/少于",
-      "location": "成都",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_dhnbtcxsfd8a?pcm=pc_SearchList",
-      "keyword": "居家办公 数据分析",
-      "source": "实习僧",
-      "found_at": "2026-07-24"
-    },
-    {
-      "id": 407894472,
-      "title": "项目管理与数字化创新实习",
-      "company": "埃森哲互联网/游戏/软件/以上",
-      "location": "上海",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_sjdihh6avvbq?pcm=pc_SearchList",
-      "keyword": "远程 BI",
-      "source": "实习僧",
-      "found_at": "2026-07-24"
-    },
     {
       "id": 858652662,
       "title": "大数据分析实习",
@@ -2190,6 +2168,39 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-08-22"
+    },
+    {
+      "id": 2795626015,
+      "title": "商业分析",
+      "company": "荷叶健康互联网/游戏/软件/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_9dmrjx1hsea9?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-08-24"
+    },
+    {
+      "id": 176379712,
+      "title": "商业分析实习",
+      "company": "CASETiFY快消/百货/批发/零售/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_o7ncfgrjk34x?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-08-24"
+    },
+    {
+      "id": 1352566601,
+      "title": "算法",
+      "company": "长擎软件电子/通信/硬件/-",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_8ovwey3gej3p?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-08-24"
     }
   ]
 }
