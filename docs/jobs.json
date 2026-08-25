@@ -1,40 +1,7 @@
 {
-  "updated_at": "2026-08-24T10:25:09",
-  "total": 200,
+  "updated_at": "2026-08-25T10:20:20",
+  "total": 204,
   "jobs": [
-    {
-      "id": 858652662,
-      "title": "大数据分析实习",
-      "company": "北京锐泽尔科技有限公司互联网/游戏/软件/-",
-      "location": "北京",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_xorf46jutf7r?pcm=pc_SearchList",
-      "keyword": "远程 数据运营",
-      "source": "实习僧",
-      "found_at": "2026-07-25"
-    },
-    {
-      "id": 3112077844,
-      "title": "数据分析实习-百度文库&百度盘",
-      "company": "百度互联网/游戏/软件/以上",
-      "location": "北京",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_n4e3cm9kw4lj?pcm=pc_SearchList",
-      "keyword": "远程 数据运营",
-      "source": "实习僧",
-      "found_at": "2026-07-25"
-    },
-    {
-      "id": 3390496136,
-      "title": "商业分析实习",
-      "company": "百度互联网/游戏/软件/以上",
-      "location": "北京",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_fihoemwfknl4?pcm=pc_SearchList",
-      "keyword": "远程 商业分析",
-      "source": "实习僧",
-      "found_at": "2026-07-25"
-    },
     {
       "id": 482106746,
       "title": "数据开发实习()",
@@ -2201,6 +2168,83 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-08-24"
+    },
+    {
+      "id": 376126319,
+      "title": "数据分析实习",
+      "company": "哔哩哔哩互联网/游戏/软件/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_sh9ophqykj41?pcm=pc_SearchList",
+      "keyword": "远程 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-08-25"
+    },
+    {
+      "id": 2681933884,
+      "title": "数据科学（安全产品方向）实习-",
+      "company": "字节跳动互联网/游戏/软件/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_clyxilnfh6za?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-08-25"
+    },
+    {
+      "id": 2709112247,
+      "title": "数据管理实习",
+      "company": "长安美泰玩具电子/通信/硬件/以上",
+      "location": "东莞",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_t3cmbuti0fab?pcm=pc_SearchList",
+      "keyword": "远程 数据运营",
+      "source": "实习僧",
+      "found_at": "2026-08-25"
+    },
+    {
+      "id": 1793166512,
+      "title": "商业分析",
+      "company": "伟思创科技互联网/游戏/软件/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_qjrcjsqgvx74?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-08-25"
+    },
+    {
+      "id": 173069087,
+      "title": "商业分析",
+      "company": "阿里巴巴互联网/游戏/软件/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_h0dwqlrdaji8?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-08-25"
+    },
+    {
+      "id": 967514621,
+      "title": "线上督学（居家线上办公）",
+      "company": "好未来教育/培训/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_vtzc6vvmes98?pcm=pc_SearchList",
+      "keyword": "居家办公 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-08-25"
+    },
+    {
+      "id": 2466886300,
+      "title": "微超算底座 / 区块链底座开发（++方向）",
+      "company": "领驭框架互联网/游戏/软件/-",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_eodfkcgqspa9?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-08-25"
     }
   ]
 }
