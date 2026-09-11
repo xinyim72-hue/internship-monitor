@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-10T13:44:40",
-  "total": 246,
+  "updated_at": "2026-09-11T13:44:16",
+  "total": 250,
   "jobs": [
     {
       "id": 1260769995,
@@ -2707,6 +2707,50 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-09-10"
+    },
+    {
+      "id": 2830038247,
+      "title": "商业分析",
+      "company": "木联能软件电子/通信/硬件/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_kg3zi1jwdzpe?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-09-11"
+    },
+    {
+      "id": 2028329534,
+      "title": "商业分析",
+      "company": "渡口网络科技电子/通信/硬件/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_eoynxbmaj7sa?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-09-11"
+    },
+    {
+      "id": 1095617771,
+      "title": "社群运营专员（长期线上实习）",
+      "company": "制趣玩家互联网/游戏/软件/-",
+      "location": "深圳",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_z8lkbvcoiian?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-09-11"
+    },
+    {
+      "id": 2658314082,
+      "title": "媒体宣传实习—— 高旅品牌「御见」",
+      "company": "上海御见文旅餐饮/酒店/旅游/娱乐/少于",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_6ik6k1iywhzz?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-09-11"
     }
   ]
 }
