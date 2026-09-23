@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-09-22T13:58:25",
-  "total": 234,
+  "updated_at": "2026-09-23T13:41:54",
+  "total": 239,
   "jobs": [
     {
       "id": 2795626015,
@@ -2575,6 +2575,61 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-09-22"
+    },
+    {
+      "id": 1400199184,
+      "title": "数据分析实习",
+      "company": "货拉拉互联网/游戏/软件/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_6ltwxor6hjm9?pcm=pc_SearchList",
+      "keyword": "远程 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-09-23"
+    },
+    {
+      "id": 3783007992,
+      "title": "数据科学实习",
+      "company": "上海英华辰睿新材料有限公司化工/能源/环保/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_1cjyywtliyok?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-09-23"
+    },
+    {
+      "id": 3994012411,
+      "title": "商业数据分析实习",
+      "company": "飞未云科企业服务/咨询/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_vbkjgfufdbmx?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-09-23"
+    },
+    {
+      "id": 4155600356,
+      "title": "美团酒店商业分析实习",
+      "company": "美团互联网/游戏/软件/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_hisckxm8pqrb?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-09-23"
+    },
+    {
+      "id": 3559124677,
+      "title": "小序推",
+      "company": "汇智金金融/经济/投资/财会/-",
+      "location": "成都",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_xnzdd87ejfps?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-09-23"
     }
   ]
 }
