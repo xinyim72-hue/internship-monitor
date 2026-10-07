@@ -1,51 +1,7 @@
 {
-  "updated_at": "2026-10-06T15:23:08",
-  "total": 162,
+  "updated_at": "2026-10-07T15:02:10",
+  "total": 160,
   "jobs": [
-    {
-      "id": 1250513330,
-      "title": "商业分析",
-      "company": "小红书科技（珠海横琴）电子/通信/硬件/-",
-      "location": "上海",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_z7nj3gkjp8wa?pcm=pc_SearchList",
-      "keyword": "远程 商业分析",
-      "source": "实习僧",
-      "found_at": "2026-09-06"
-    },
-    {
-      "id": 718468731,
-      "title": "商业分析",
-      "company": "伟思创科技互联网/游戏/软件/以上",
-      "location": "北京",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_eedp0nfyz9ub?pcm=pc_SearchList",
-      "keyword": "远程 商业分析",
-      "source": "实习僧",
-      "found_at": "2026-09-06"
-    },
-    {
-      "id": 1537927794,
-      "title": "商业分析",
-      "company": "原创软件电子/通信/硬件/-",
-      "location": "杭州",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_fegcpzgbqe8v?pcm=pc_SearchList",
-      "keyword": "远程 商业分析",
-      "source": "实习僧",
-      "found_at": "2026-09-06"
-    },
-    {
-      "id": 1914310793,
-      "title": "校园大使-中山大学",
-      "company": "舒客电商互联网/游戏/软件/-",
-      "location": "广州",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_yifusvvgmsdi?pcm=pc_SearchList",
-      "keyword": "远程 BI",
-      "source": "实习僧",
-      "found_at": "2026-09-06"
-    },
     {
       "id": 4023151036,
       "title": "数据科学实习-",
@@ -1783,6 +1739,28 @@
       "keyword": "远程 数据运营",
       "source": "实习僧",
       "found_at": "2026-10-06"
+    },
+    {
+      "id": 624273023,
+      "title": "数据科学（社交与创）实习-数据科学",
+      "company": "字节跳动互联网/游戏/软件/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_umv4m1mibxzo?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-10-07"
+    },
+    {
+      "id": 3730504081,
+      "title": "英文电商平台客服",
+      "company": "KICKSCREW快消/百货/批发/零售/-",
+      "location": "广州",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_jvzsatsgznte?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-10-07"
     }
   ]
 }
