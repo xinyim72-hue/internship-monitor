@@ -1,18 +1,7 @@
 {
-  "updated_at": "2026-10-26T13:53:32",
-  "total": 180,
+  "updated_at": "2026-10-27T14:06:10",
+  "total": 184,
   "jobs": [
-    {
-      "id": 1898672025,
-      "title": "机械零仿真与迭代（项目制 · 远）",
-      "company": "瞬知智能互联网/游戏/软件/-",
-      "location": "上海",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_bt3ot85gqhyl?pcm=pc_SearchList",
-      "keyword": "远程 BI",
-      "source": "实习僧",
-      "found_at": "2026-09-26"
-    },
     {
       "id": 2985828785,
       "title": "专车事业部-数据分析实习（）",
@@ -1981,6 +1970,61 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-10-26"
+    },
+    {
+      "id": 3735555770,
+      "title": "数据分析实习",
+      "company": "中国安科院公共事业/NGO/政府/-",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_oqyethy9z5xt?pcm=pc_SearchList",
+      "keyword": "远程 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-10-27"
+    },
+    {
+      "id": 2368198427,
+      "title": "数据分析实习",
+      "company": "哔哩哔哩互联网/游戏/软件/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_yim2qplgi7da?pcm=pc_SearchList",
+      "keyword": "远程 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-10-27"
+    },
+    {
+      "id": 695729623,
+      "title": " ",
+      "company": "万宝盛华大中华企业服务/咨询/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_ve5aqsvcv7lz?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-10-27"
+    },
+    {
+      "id": 380018018,
+      "title": "教",
+      "company": "长思教育教育/培训/以下",
+      "location": "南京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_ej9fzbjllrn8?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-10-27"
+    },
+    {
+      "id": 2117652195,
+      "title": "新媒体运营",
+      "company": "上海寅映文化传媒有限公司广告/传媒/公关/展览/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_kskypxl82kbt?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-10-27"
     }
   ]
 }
