@@ -1,6 +1,6 @@
 {
-  "updated_at": "2026-10-31T14:49:24",
-  "total": 189,
+  "updated_at": "2026-11-01T15:15:14",
+  "total": 196,
   "jobs": [
     {
       "id": 2820481779,
@@ -2080,6 +2080,83 @@
       "keyword": "远程 数据运营",
       "source": "实习僧",
       "found_at": "2026-10-31"
+    },
+    {
+      "id": 1474908332,
+      "title": "数据分析实习",
+      "company": "万宝盛华大中华企业服务/咨询/以上",
+      "location": "广州",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_xacfg0898wxc?pcm=pc_SearchList",
+      "keyword": "远程 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-11-01"
+    },
+    {
+      "id": 2689840364,
+      "title": "数据科学实习（商业分析/机器学习方向）",
+      "company": "拓尔思互联网/游戏/软件/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_jqyiewk12ykg?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-11-01"
+    },
+    {
+      "id": 3742644052,
+      "title": "数据科学实习 - 直播",
+      "company": "字节跳动互联网/游戏/软件/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_czdyw6rwl70m?pcm=pc_SearchList",
+      "keyword": "远程 数据科学",
+      "source": "实习僧",
+      "found_at": "2026-11-01"
+    },
+    {
+      "id": 1182072324,
+      "title": "数据分析实习-上海()",
+      "company": "霸王茶姬快消/百货/批发/零售/-",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_ihzmnbd8zz71?pcm=pc_SearchList",
+      "keyword": "远程 数据运营",
+      "source": "实习僧",
+      "found_at": "2026-11-01"
+    },
+    {
+      "id": 1040089680,
+      "title": "商业务分析实习",
+      "company": "小红书互联网/游戏/软件/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_xcd7grzkqpdt?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-11-01"
+    },
+    {
+      "id": 4064680549,
+      "title": "文案编辑录入",
+      "company": "万昭贸易互联网/游戏/软件/-",
+      "location": "重庆",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_9qbp4py3th0j?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-11-01"
+    },
+    {
+      "id": 1044346925,
+      "title": "文案编辑",
+      "company": "万昭贸易互联网/游戏/软件/-",
+      "location": "南京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_kd49gjb4uegz?pcm=pc_SearchList",
+      "keyword": "远程 BI",
+      "source": "实习僧",
+      "found_at": "2026-11-01"
     }
   ]
 }
