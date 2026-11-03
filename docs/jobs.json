@@ -1,18 +1,7 @@
 {
-  "updated_at": "2026-11-02T15:30:53",
-  "total": 197,
+  "updated_at": "2026-11-03T15:45:02",
+  "total": 200,
   "jobs": [
-    {
-      "id": 4196835922,
-      "title": "数据科学与分析实习",
-      "company": "小红书互联网/游戏/软件/以上",
-      "location": "上海",
-      "salary": "",
-      "link": "https://www.shixiseng.com/intern/inn_3aity7auyyrk?pcm=pc_SearchList",
-      "keyword": "远程 数据科学",
-      "source": "实习僧",
-      "found_at": "2026-10-03"
-    },
     {
       "id": 449344831,
       "title": "高级数据分析讲",
@@ -2168,6 +2157,50 @@
       "keyword": "远程 BI",
       "source": "实习僧",
       "found_at": "2026-11-02"
+    },
+    {
+      "id": 2279677173,
+      "title": "数据分析实习",
+      "company": "清华四川能源互联网研究院电子/通信/硬件/-",
+      "location": "成都",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_ryk2h6ebf0a5?pcm=pc_SearchList",
+      "keyword": "远程 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-11-03"
+    },
+    {
+      "id": 382529972,
+      "title": "数据分析实习",
+      "company": "美团互联网/游戏/软件/以上",
+      "location": "北京",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_ijvzdgthpbbb?pcm=pc_SearchList",
+      "keyword": "远程 数据分析",
+      "source": "实习僧",
+      "found_at": "2026-11-03"
+    },
+    {
+      "id": 2820481779,
+      "title": "数据采集员",
+      "company": "新光世界不限/-",
+      "location": "成都",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_8zan3vzkzczw?pcm=pc_SearchList",
+      "keyword": "远程 数据运营",
+      "source": "实习僧",
+      "found_at": "2026-11-03"
+    },
+    {
+      "id": 1628605705,
+      "title": "商业分析实习",
+      "company": "哈啰互联网/游戏/软件/以上",
+      "location": "上海",
+      "salary": "",
+      "link": "https://www.shixiseng.com/intern/inn_b1g60ct7beka?pcm=pc_SearchList",
+      "keyword": "远程 商业分析",
+      "source": "实习僧",
+      "found_at": "2026-11-03"
     }
   ]
 }
